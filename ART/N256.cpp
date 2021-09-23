@@ -31,7 +31,6 @@ bool N256::insert(uint8_t key, N *val, bool flush) {
 }
 
 void N256::change(uint8_t key, N *n) {
-
     children[key].store(n, std::memory_order_seq_cst);
     flush_data((void *)&children[key], sizeof(std::atomic<N *>));
 }

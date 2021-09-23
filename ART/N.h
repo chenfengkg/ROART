@@ -120,6 +120,7 @@ class N : public BaseNode {
 
     // 3b type 59b version 1b lock 1b obsolete
     // obsolete means this node has been deleted
+    // previous comment is wrong, in fact, it is 4b type 58b version 1b lock 1b obsolete
     std::atomic<uint64_t> *type_version_lock_obsolete;
 
     alignas(64) std::atomic<Prefix> prefix;

@@ -10,7 +10,7 @@
 
 using namespace PART_ns;
 
-inline void clear_data() { system("rm -rf /mnt/pmem0/jzc/part.data"); }
+inline void clear_data() { system("rm -rf /data/pmem0/roart/jzc/part.data"); }
 
 TEST(TestCorrectness, PM_ART) {
 

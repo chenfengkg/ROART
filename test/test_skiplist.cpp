@@ -5,7 +5,7 @@
 // using namespace skiplist;
 //
 // inline void clear_data() {
-//    system("rm -rf /mnt/pmem0/matianmao/skiplist.data");
+//    system("rm -rf /data/pmem0/roart/matianmao/skiplist.data");
 //}
 //
 // TEST(TestSkipList, skiplist) {

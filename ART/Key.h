@@ -68,6 +68,7 @@ inline Key *Key::make_leaf(uint64_t key, size_t key_len, uint64_t value) {
 
     k->value = value;
     k->key_len = key_len;
+    //builtin_bswap: Returns x with the order of the bytes reversed; for example, 0xaabb becomes 0xbbaa.
     reinterpret_cast<uint64_t *>(&k->fkey[0])[0] = __builtin_bswap64(key);
 
     return k;

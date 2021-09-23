@@ -57,7 +57,7 @@ Tree::Tree() {
     NVMMgr *mgr = get_nvm_mgr();
     //    Epoch_Mgr * epoch_mgr = new Epoch_Mgr();
 #ifdef ARTPMDK
-    const char *pool_name = "/mnt/pmem0/matianmao/dlartpmdk.data";
+    const char *pool_name = "/data/pmem0/roart/matianmao/dlartpmdk.data";
     const char *layout_name = "DLART";
     size_t pool_size = 64LL * 1024 * 1024 * 1024; // 16GB
 
@@ -1210,7 +1210,7 @@ Tree::checkPrefixPessimistic(N *n, const Key *k, uint32_t &level,
                 (n->getLevel() > level ? n->getLevel() - level
                                        : level - n->getLevel());
             Leaf *kr = N::getAnyChildTid(n);
-            p.prefixCount = discrimination;
+            p.prefixCount = discrimination;//不管大小都是以它们之间的差作为prefixCount
             for (uint32_t i = 0;
                  i < std::min(discrimination, maxStoredPrefixLength); i++) {
 #ifdef KEY_INLINE
@@ -1218,7 +1218,7 @@ Tree::checkPrefixPessimistic(N *n, const Key *k, uint32_t &level,
 #else
                 p.prefix[i] = kr->fkey[level + i];
 #endif
-            }
+            }                       
             n->setPrefix(p.prefix, p.prefixCount, true);
             n->writeUnlock();
         }
@@ -1238,7 +1238,7 @@ Tree::checkPrefixPessimistic(N *n, const Key *k, uint32_t &level,
         for (uint32_t i = ((level + p.prefixCount) - n->getLevel());
              i < p.prefixCount; ++i) {
             if (i >= maxStoredPrefixLength && !load_flag) {
-                //            if (i == maxStoredPrefixLength) {
+                // if (i == maxStoredPrefixLength) {
                 // Optimistic path compression
                 kt = N::getAnyChildTid(n);
                 load_flag = true;
